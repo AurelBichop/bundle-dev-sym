@@ -7,6 +7,7 @@
         "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "aurel/object-translation-bundle": "@dev",
         "doctrine/dbal": "^3.10.0",
         "doctrine/doctrine-bundle": "^2.15",
         "doctrine/doctrine-migrations-bundle": "^3.4.2",
@@ -43,6 +44,12 @@
         "zenstruck/browser": "^1.9.1",
         "zenstruck/foundry": "^2.6.1"
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "object-translation-bundle"
+        }
+    ],
     "config": {
         "allow-plugins": {
             "php-http/discovery": true,

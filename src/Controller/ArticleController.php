@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
+use Aurel\ObjectTranslationBundle\ObjectTranslator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -20,8 +21,10 @@ final class ArticleController extends AbstractController
     }
 
     #[Route('/news/{slug:article}', name: 'app_article_show')]
-    public function show(Article $article): Response
+    public function show(Article $article, ObjectTranslator $translator): Response
     {
+        $article = $translator->translate($article);
+
         return $this->render('article/show.html.twig', [
             'article' => $article,
             'comments' => [
