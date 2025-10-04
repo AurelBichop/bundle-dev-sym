@@ -10,6 +10,7 @@ final class ObjectTranslator
     public function __construct(
         private readonly LocaleAwareInterface $localeAware,
         private readonly string               $defaultLocale,
+        private string $translationClass,
     )
     {
 
@@ -29,8 +30,7 @@ final class ObjectTranslator
         if($this->defaultLocale === $locale) {
             return $object;
         }
-        // todo translate object
 
-        return $object;
+        return new TranslatedObject($object);
     }
 }

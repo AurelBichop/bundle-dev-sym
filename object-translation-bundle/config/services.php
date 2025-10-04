@@ -10,6 +10,7 @@ return static function (ContainerConfigurator $container) {
         ->args([
             service('translation.locale_switcher'),
             param('kernel.default_locale'),
+            abstract_arg('Translation class')
         ])
        ->alias(ObjectTranslator::class, 'aurel.object_translator')
    ;

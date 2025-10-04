@@ -8,6 +8,11 @@
             "Aurel\\ObjectTranslationBundle\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Aurel\\ObjectTranslationBundle\\Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "AurelBichop",

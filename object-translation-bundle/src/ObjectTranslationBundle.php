@@ -2,6 +2,7 @@
 
 namespace Aurel\ObjectTranslationBundle;
 
+use App\Entity\Translation;
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -18,6 +19,12 @@ final class ObjectTranslationBundle extends AbstractBundle
                 ->stringNode('translation_class')
                     ->info('The class name of your translation entity.')
                     ->example('App\Entity\Translation')
+                    ->isRequired()
+                    ->cannotBeEmpty()
+                    ->validate()
+                        ->ifTrue(fn ($value) => !is_a($value, Translation::class, true))
+                        ->thenInvalid('The Tranlation class "%s" must extend Aurel\ObjectTranslationBundle\Model\Translation.')
+                    ->end()
                 ->end()
             ->end();
     }
@@ -33,5 +40,9 @@ final class ObjectTranslationBundle extends AbstractBundle
     public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
     {
         $container->import('../config/services.php');
+
+        $builder->getDefinition('aurel.object_translator')
+            ->setArgument(2, $config['translation_class'])
+        ;
     }
 }
