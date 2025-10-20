@@ -3,12 +3,15 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Aurel\ObjectTranslationBundle\Mapping\TranlatableProperty;
+use Aurel\ObjectTranslationBundle\Mapping\Translatable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
+#[Translatable('article')]
 class Article
 {
     #[ORM\Id]
@@ -20,6 +23,7 @@ class Article
     private ?string $slug = null;
 
     #[ORM\Column(length: 255)]
+    #[TranlatableProperty]
     private ?string $title = null;
 
     #[ORM\Column]
@@ -29,6 +33,7 @@ class Article
     private ?string $author = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[TranlatableProperty]
     private ?string $content = null;
 
     #[ORM\ManyToOne(inversedBy: 'articles')]

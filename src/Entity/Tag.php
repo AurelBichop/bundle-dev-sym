@@ -3,11 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\TagRepository;
+use Aurel\ObjectTranslationBundle\Mapping\TranlatableProperty;
+use Aurel\ObjectTranslationBundle\Mapping\Translatable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TagRepository::class)]
+#[Translatable('category')]
 class Tag
 {
     #[ORM\Id]
@@ -16,6 +19,7 @@ class Tag
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[TranlatableProperty]
     private ?string $name = null;
 
     /**
